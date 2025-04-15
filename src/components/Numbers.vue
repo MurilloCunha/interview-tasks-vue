@@ -24,10 +24,9 @@ function onMouseOver(hoveredNumber: number) {
   })
 }
 
-function reset()
-{
-	const nums = document.querySelectorAll('.number');
-	nums.forEach(num => num.classList.remove('active'))
+function onMouseOut() {
+  const numberDivs = [...document.querySelectorAll('[data-number]')];
+  numberDivs.forEach(num => num.classList.remove('active'))
 }
 </script>
 
@@ -46,7 +45,7 @@ function reset()
         v-for="number in numberList"
         :key="number"
         @mouseover="onMouseOver(number)"
-        @mouseout="reset"
+        @mouseout="onMouseOut"
       >
         {{ number }}
       </div>
