@@ -11,20 +11,21 @@ function generateNumberList() {
 }
 
 
-function onMouseOver(hoveredNumber: number) {
+function highlightDivisors(hoveredNumber: number) {
   const numberDivs = [...document.querySelectorAll('[data-number]')];
 
   numberDivs.forEach((numberDiv) => {
     const divNumber = Number(numberDiv.getAttribute('data-number'));
+    const isDivisor = hoveredNumber % divNumber === 0;
 
-    if (hoveredNumber % divNumber === 0) {
+    if (isDivisor) {
       numberDiv.classList.add('active');
       console.log('divisor', divNumber)
     }
   })
 }
 
-function onMouseOut() {
+function clearDivisors() {
   const numberDivs = [...document.querySelectorAll('[data-number]')];
   numberDivs.forEach(num => num.classList.remove('active'))
 }
@@ -44,8 +45,8 @@ function onMouseOut() {
         :id="'number-'+number"
         v-for="number in numberList"
         :key="number"
-        @mouseover="onMouseOver(number)"
-        @mouseout="onMouseOut"
+        @mouseover="highlightDivisors(number)"
+        @mouseout="clearDivisors"
       >
         {{ number }}
       </div>
