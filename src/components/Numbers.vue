@@ -4,12 +4,10 @@ import { ref, computed } from 'vue';
 let limit = ref(100);
 const numberList = computed(() => generateNumberList());
 
-
 function generateNumberList() {
   const numbers = Array.from({ length: limit.value }, (_, index) => index);
   return numbers.sort(() => Math.random() - 0.5);
 }
-
 
 function highlightDivisors(hoveredNumber: number) {
   const numberDivs = [...document.querySelectorAll('[data-number]')];
