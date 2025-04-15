@@ -32,29 +32,53 @@ function reset()
 </script>
 
 <template>
-	<div>
-		<input type="number" v-model="limit" /><br /><br />
-		<div class="number"
-			:id="'number-'+number"
-			v-for="number in n()"
-			:key="number"
-			@mouseover="hov(number)"
-			@mouseout="reset"
-		>
-			{{ number }}
-		</div>
+	<div class="wrapper">
+    <div class="labelInput">
+      <label for="limit">Limit</label>
+      <input id="limit" type="number" v-model="limit" />
+    </div>
+
+    <div class="numberList">
+      <div class="number"
+        :id="'number-'+number"
+        v-for="number in n()"
+        :key="number"
+        @mouseover="hov(number)"
+        @mouseout="reset"
+      >
+        {{ number }}
+      </div>
+    </div>
 	</div>
 </template>
 
 <style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:2rem;
+}
+
+.labelInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.numberList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .number {
-	display: inline-block;
-	padding: 5px;
-	background-color: lightgrey;
-	margin: 5px;
+  padding: 0.3125rem;
+  display: inline-block;
+  background-color: lightgrey;
 }
 
 .active {
-	background-color: red;
+  background-color: red;
 }
 </style>
