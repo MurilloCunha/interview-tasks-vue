@@ -11,18 +11,17 @@ function generateNumberList() {
 }
 
 
-function hov(number) {
-  const nums = document.querySelectorAll('.number');
+function onMouseOver(hoveredNumber: number) {
+  const numberDivs = [...document.querySelectorAll('[data-number]')];
 
-  for(let i = 0; i < nums.length; i++)
-  {
-    const num = nums[i].textContent.trim();
-    if(number % num === 0)
-    {
-      nums[i].classList.add('active')
-      console.log('divisor', num)
+  numberDivs.forEach((numberDiv) => {
+    const divNumber = Number(numberDiv.getAttribute('data-number'));
+
+    if (hoveredNumber % divNumber === 0) {
+      numberDiv.classList.add('active');
+      console.log('divisor', divNumber)
     }
-  }
+  })
 }
 
 function reset()
@@ -42,10 +41,11 @@ function reset()
     <div class="numberList">
       <div 
         class="number"
+        :data-number="number"
         :id="'number-'+number"
         v-for="number in numberList"
         :key="number"
-        @mouseover="hov(number)"
+        @mouseover="onMouseOver(number)"
         @mouseout="reset"
       >
         {{ number }}
