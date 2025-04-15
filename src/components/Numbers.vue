@@ -1,14 +1,15 @@
 <script setup lang="ts">
-const numbers = [];
-let limit = 100;
+import { ref, computed } from 'vue';
 
-function n()
-{
-	let numbers = [];
-	for(var i = 0; i < limit; i++) { numbers = [...numbers, i]; }
+let limit = ref(100);
+const numberList = computed(() => generateNumberList());
 
-	return numbers.sort(() => Math.random() - 0.5);
+
+function generateNumberList() {
+  const numbers = Array.from({ length: limit.value }, (_, index) => index);
+  return numbers.sort(() => Math.random() - 0.5);
 }
+
 
 function hov(number) {
   const nums = document.querySelectorAll('.number');
@@ -39,9 +40,10 @@ function reset()
     </div>
 
     <div class="numberList">
-      <div class="number"
+      <div 
+        class="number"
         :id="'number-'+number"
-        v-for="number in n()"
+        v-for="number in numberList"
         :key="number"
         @mouseover="hov(number)"
         @mouseout="reset"
